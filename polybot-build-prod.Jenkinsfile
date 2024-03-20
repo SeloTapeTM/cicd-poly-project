@@ -22,6 +22,7 @@ pipeline {
                     '''
                 }
             }
+        }
         stage('Trigger Release') {
             steps {
                 build job: 'poly-release', wait: false, parameters: [
@@ -29,7 +30,6 @@ pipeline {
                     ]
                 }
             }
-        }
     }
     post {
         always {
