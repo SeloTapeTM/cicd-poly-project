@@ -8,7 +8,7 @@ pipeline {
     environment {
         DH_NAME = "selotapetm"
         FULL_VER = "0.0.$BUILD_NUMBER"
-        IMAGE_NAME = "polybotcicd"
+        IMAGE_NAME = "polybot-cicd-prod"
     }
     stages {
         stage('Build') {
