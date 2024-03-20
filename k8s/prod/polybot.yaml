@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: selotapetm/polybot-cicd-prod:0.0.200
+        image: selotapetm/polybot-cicd-prod:0.0.201
 ---
 
 apiVersion: v1
