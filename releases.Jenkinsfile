@@ -12,8 +12,9 @@ pipeline {
                 git checkout releases
                 git merge origin/main
                 sed -i 's/image: .*/image: $POLYBOT_PROD_IMAGE_URL/g' k8s/prod/polybot.yaml
+                echo "test"
                 cat k8s/prod/polybot.yaml
-
+                echo "test"
                 git add k8s/prod/polybot.yaml
                 git commit -m "$POLYBOT_PROD_IMAGE_URL"
                 git push origin releases
