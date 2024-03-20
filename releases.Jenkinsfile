@@ -10,7 +10,6 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     sh '''
-
                     git config --global user.email "Jenkins@ip-10-0-0-178"
                     git config --global user.name "JenkinsSeloTapeTM"
                     git checkout releases
@@ -21,7 +20,7 @@ pipeline {
                     echo "test"
                     git add k8s/prod/polybot.yaml
                     git commit -m "$POLYBOT_PROD_IMAGE_URL"
-                    git push https://github.com/SeloTapeTM/cicd-poly-project.git releases
+                    git push https://SeloTapeTM:$PASS@github.com/SeloTapeTM/cicd-poly-project.git releases
                     '''
                 }
             }
