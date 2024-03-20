@@ -2,7 +2,6 @@ pipeline {
     agent any
     options {
         timestamps()
-        disableConcurrentBuilds()
     }
 
     environment {
@@ -24,6 +23,13 @@ pipeline {
                 }
             }
         }
+        stage('Trigger Release') {
+            steps {
+                build job: 'polybot-release', wait: false, parameters: [
+                    string(name: 'POLYBOT_PROD_IMAGE_URL', value: "$DH_NAME/$IMAGE_NAME:$FULL_VER")
+                    ]
+                }
+            }
     }
     post {
         always {
