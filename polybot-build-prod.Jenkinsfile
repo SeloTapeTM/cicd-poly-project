@@ -2,7 +2,6 @@ pipeline {
     agent any
     options {
         timestamps()
-        disableConcurrentBuilds()
     }
 
     environment {
@@ -21,6 +20,13 @@ pipeline {
                     docker build -t $DH_NAME/$IMAGE_NAME:$FULL_VER .
                     docker push $DH_NAME/$IMAGE_NAME:$FULL_VER
                     '''
+                }
+            }
+        stage('Trigger Release') {
+            steps {
+                build job: 'poly-release', wait: false, parameters: [
+                    string(name: 'POLYBOT_PROD_IMAGE_URL', value: "$DH_NAME/$IMAGE_NAME:$FULL_VER")
+                    ]
                 }
             }
         }
