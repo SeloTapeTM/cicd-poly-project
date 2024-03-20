@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: IMG_URL
+        image: IMG_URL # polybot img url or name from dockerhub
 ---
 
 apiVersion: v1
