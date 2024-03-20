@@ -9,8 +9,14 @@ pipeline {
         stage('Update YAML') {
             steps {
                 sh '''
+                cat k8s/prod/polybot.yaml
+
+                sed -i 's/image: .*/image: $POLYBOT_PROD_IMAGE_URL/g' k8s/prod/polybot.yaml
+
+                cat k8s/prod/polybot.yaml
+
                 git checkout releases
-                python -c "import sys;lines=sys.stdin.read();print lines.replace('image: IMG_NAME','image: $POLYBOT_PROD_IMAGE_URL')" < k8s/prod/polybot.yaml
+                git merge main
                 git add k8s/prod/polybot.yaml
                 git commit -m "$POLYBOT_PROD_IMAGE_URL"
                 git push origin releases
