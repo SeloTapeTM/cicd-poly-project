@@ -3,7 +3,8 @@ pipeline {
     options {
         timestamps()
     }
-    parameters { string(name: 'POLYBOT_PROD_IMAGE_URL', defaultValue: '', description: '') }
+    parameters { string(name: 'DEV_IMAGE_URL', defaultValue: '', description: '') }
+
 
     stages {
         stage('Update YAML') {

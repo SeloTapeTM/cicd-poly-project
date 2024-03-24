@@ -2,13 +2,12 @@ pipeline {
     agent any
     options {
         timestamps()
-        disableConcurrentBuilds()
     }
 
     environment {
         DH_NAME = "selotapetm"
         FULL_VER = "0.0.$BUILD_NUMBER"
-        IMAGE_NAME = "yolo-cicd-prod"
+        IMAGE_NAME = "yolo-cicd-dev"
     }
     stages {
         stage('Build') {
@@ -16,7 +15,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
                 {
                     sh '''
-                    cd polybot
+                    cd yolo5
                     docker login -u $USERNAME -p $PASSWORD
                     docker build -t $DH_NAME/$IMAGE_NAME:$FULL_VER .
                     docker push $DH_NAME/$IMAGE_NAME:$FULL_VER
@@ -24,6 +23,13 @@ pipeline {
                 }
             }
         }
+        stage('Trigger Release') {
+            steps {
+                build job: 'yolo-release', wait: false, parameters: [
+                    string(name: 'YOLO_DEV_IMAGE_URL', value: "$DH_NAME/$IMAGE_NAME:$FULL_VER")
+                    ]
+                }
+            }
     }
     post {
         always {
