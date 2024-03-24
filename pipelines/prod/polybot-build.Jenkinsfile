@@ -2,13 +2,12 @@ pipeline {
     agent any
     options {
         timestamps()
-        disableConcurrentBuilds()
     }
 
     environment {
         DH_NAME = "selotapetm"
         FULL_VER = "0.0.$BUILD_NUMBER"
-        IMAGE_NAME = "yolo-cicd-prod"
+        IMAGE_NAME = "polybot-cicd-prod"
     }
     stages {
         stage('Build') {
@@ -24,6 +23,13 @@ pipeline {
                 }
             }
         }
+        stage('Trigger Release') {
+            steps {
+                build job: 'release-prod', wait: false, parameters: [
+                    string(name: 'PROD_IMAGE_URL', value: "$DH_NAME/$IMAGE_NAME:$FULL_VER")
+                    ]
+                }
+            }
     }
     post {
         always {

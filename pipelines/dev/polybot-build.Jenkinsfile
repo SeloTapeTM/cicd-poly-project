@@ -7,7 +7,7 @@ pipeline {
     environment {
         DH_NAME = "selotapetm"
         FULL_VER = "0.0.$BUILD_NUMBER"
-        IMAGE_NAME = "polybot-cicd-prod"
+        IMAGE_NAME = "polybot-cicd-dev"
     }
     stages {
         stage('Build') {
@@ -25,8 +25,8 @@ pipeline {
         }
         stage('Trigger Release') {
             steps {
-                build job: 'polybot-release', wait: false, parameters: [
-                    string(name: 'POLYBOT_PROD_IMAGE_URL', value: "$DH_NAME/$IMAGE_NAME:$FULL_VER")
+                build job: 'release-dev', wait: false, parameters: [
+                    string(name: 'DEV_IMAGE_URL', value: "$DH_NAME/$IMAGE_NAME:$FULL_VER")
                     ]
                 }
             }
