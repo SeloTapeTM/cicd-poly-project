@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: IMG_URL # polybot img url or name from dockerhub
+        image: selotapetm/polybot-cicd-dev:0.0.4
 ---
 
 apiVersion: v1
