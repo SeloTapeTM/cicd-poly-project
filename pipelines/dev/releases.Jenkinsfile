@@ -15,7 +15,7 @@ pipeline {
 
                     if [[ $DEV_IMAGE_URL == *"polybot-cicd-prod" ]]; then
                         YAML_FILE="k8s/prod/polybot.yaml"
-                    elif [[ $DEV_IMAGE_URL == *"polybot-cicd-prod" ]]; then
+                    elif [[ $DEV_IMAGE_URL == *"yolo-cicd-prod" ]]; then
                         YAML_FILE="k8s/prod/yolo5.yaml"
                     else
                         exit 7
