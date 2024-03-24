@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: IMG_URL # yolo5 img url or name from dockerhub
+        image: selotapetm/yolo-cicd-prod:0.0.398
 ---
 
 apiVersion: v1
