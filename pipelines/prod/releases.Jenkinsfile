@@ -25,9 +25,9 @@ pipeline {
                     git config --global user.name "JenkinsSeloTapeTM"
                     git checkout releases
                     git merge origin/main
-                    sed -i "s|image: .*|image: ${POLYBOT_PROD_IMAGE_URL}|g" k8s/prod/polybot.yaml
+                    sed -i "s|image: .*|image: ${PROD_IMAGE_URL}|g" ${YAML_FILE}
                     git add $YAML_FILE
-                    git commit -m "$POLYBOT_PROD_IMAGE_URL"
+                    git commit -m "$PROD_IMAGE_URL"
                     git push https://SeloTapeTM:$PASS@github.com/SeloTapeTM/cicd-poly-project.git releases
                     '''
                 }
