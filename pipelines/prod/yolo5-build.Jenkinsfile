@@ -26,7 +26,7 @@ pipeline {
         stage('Trigger Release') {
             steps {
                 build job: 'release-prod', wait: false, parameters: [
-                    string(name: 'YOLO_PROD_IMAGE_URL', value: "$DH_NAME/$IMAGE_NAME:$FULL_VER")
+                    string(name: 'PROD_IMAGE_URL', value: "$DH_NAME/$IMAGE_NAME:$FULL_VER")
                     ]
                 }
             }
