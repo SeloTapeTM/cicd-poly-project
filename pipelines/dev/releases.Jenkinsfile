@@ -13,10 +13,10 @@ pipeline {
                     sh '''
                     printenv
 
-                    if [[ $DEV_IMAGE_URL == *"polybot-cicd-prod"* ]]; then
-                        YAML_FILE="k8s/prod/polybot.yaml"
-                    elif [[ $DEV_IMAGE_URL == *"yolo-cicd-prod"* ]]; then
-                        YAML_FILE="k8s/prod/yolo5.yaml"
+                    if [[ $DEV_IMAGE_URL == *"polybot-cicd-dev"* ]]; then
+                        YAML_FILE="k8s/dev/polybot.yaml"
+                    elif [[ $DEV_IMAGE_URL == *"yolo-cicd-dev"* ]]; then
+                        YAML_FILE="k8s/dev/yolo5.yaml"
                     else
                         exit 7
                     fi
