@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://docker.io') {
+                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
                     script {
                     docker.build("${env.DH_NAME}/${env.IMAGE_NAME}:${env.FULL_VER}", "-f polybot/Dockerfile ./polybot").push()
                     }
