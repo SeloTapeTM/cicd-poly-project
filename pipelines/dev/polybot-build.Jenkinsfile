@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withDockerRegistry(credentialsId: 'dockerhub') {
+                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://docker.io') {
                     script {
                     docker.build("${env.DH_NAME}/${env.IMAGE_NAME}:${env.FULL_VER}", "-f polybot/Dockerfile ./polybot").push()
                     }
@@ -21,7 +21,7 @@ pipeline {
 //                 {
 //                     sh '''
 //                     cd polybot
-//                     docker login -u $USERNAME -p $PASSWORD
+//                     docker login -u $USERNAMEd -p $PASSWORD
 //                     docker build -t $DH_NAME/$IMAGE_NAME:$FULL_VER .
 //                     docker push $DH_NAME/$IMAGE_NAME:$FULL_VER
 //                     '''
