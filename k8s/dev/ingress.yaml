@@ -8,7 +8,7 @@ spec:
   tls:
   - hosts:
     - omerd-bot-k8s-dev.devops-int-college.com
-    secretName: omerd-polybot-tls
+    secretName: omerd-tls-star
   rules:
   - host: omerd-bot-k8s-dev.devops-int-college.com
     http:

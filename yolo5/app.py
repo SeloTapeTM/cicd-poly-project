@@ -1,17 +1,19 @@
 import json
 import time
+import os
 from pathlib import Path
 import requests
 from detect import run
 import yaml
 from loguru import logger
 import boto3
+from botocore.exceptions import ClientError
 from decimal import Decimal
 
 
 # Static Helper Methods
 def get_secret():
-    secret_name = "omerd-secret-tg"
+    secret_name = os.environ['secret_name']
     region_name = "eu-central-1"
 
     # Create a Secrets Manager client
@@ -36,12 +38,11 @@ def get_secret():
 
 # load TELEGRAM_TOKEN value from Secret Manager
 secrets = get_secret()
-TELEGRAM_TOKEN = secrets["TELEGRAM_TOKEN"]  # os.environ['TELEGRAM_TOKEN']
-
-TELEGRAM_APP_URL = secrets["TELEGRAM_APP_URL"]  # os.environ['TELEGRAM_APP_URL']
+# TELEGRAM_TOKEN = secrets["TELEGRAM_TOKEN"]  # os.environ['TELEGRAM_TOKEN']
+queue_name = secrets["QUEUE_NAME"]
+TELEGRAM_APP_URL = secrets["TELEGRAM_APP_URL_K8S"]  # os.environ['TELEGRAM_APP_URL']
 
 images_bucket = 'omers3bucketpublic'
-queue_name = 'omerd-aws'
 
 sqs_client = boto3.client('sqs', region_name='eu-central-1')
 
@@ -148,7 +149,7 @@ def consume():
                 # requests.get(f'http://{TELEGRAM_APP_URL}/results?predictionId={prediction_id}&chatId={chat_id}')
                 logger.info(f'before post')
                 time.sleep(2)
-                requests.get(f'https://omerd-bot.devops-int-college.com:443/results/?predictionId={prediction_id}&chatId={chat_id}')
+                requests.get(f'https://{TELEGRAM_APP_URL}:443/results/?predictionId={prediction_id}&chatId={chat_id}')
                 logger.info(f'after post')
 
             # Delete the message from the queue as the job is considered as DONE

@@ -19,6 +19,9 @@ spec:
       containers:
       - name: polybot
         image: IMG_URL #selotapetm/polybot-k8s:0.0.3
+        env:
+          - name: secret_name
+            value: "omerd-secret-tg"
 ---
 # polybot-service.yaml
 
