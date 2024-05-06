@@ -1,4 +1,4 @@
-# k8s/deployment-demo.yaml
+# polybot-deployment.yaml
 
 apiVersion: apps/v1
 kind: Deployment
@@ -17,9 +17,10 @@ spec:
           app: polybot
     spec:
       containers:
-      - name: server
-        image: IMG_URL # polybot img url or name from dockerhub
+      - name: polybot
+        image: IMG_URL #selotapetm/polybot-k8s:0.0.3
 ---
+# polybot-service.yaml
 
 apiVersion: v1
 kind: Service

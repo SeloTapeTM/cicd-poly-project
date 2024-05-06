@@ -1,34 +1,38 @@
-# k8s/deployment-demo.yaml
+# yolo-deployment.yaml
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: yolo5
+  name: yolo5-dev
   labels:
-    app: yolo5
+    app: yolo5-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: yolo5
+      app: yolo5-dev
   template:
     metadata:
         labels:
-          app: yolo5
+          app: yolo5-dev
     spec:
       containers:
-      - name: server
-        image: IMG_URL # yolo5 img url or name from dockerhub
+      - name: yolo5-dev
+        image: IMG_URL #selotapetm/yolo5-dev-k8s:0.0.4
+        ports:
+        - containerPort: 8080
+
 ---
+# yolo-service.yaml
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: yolo5-svc
+  name: yolo5-dev-svc
 spec:
   selector:
-    app: yolo5
+    app: yolo5-dev
   ports:
     - protocol: TCP
-      port: 8443
-      targetPort: 8443
+      port: 8080
+      targetPort: 8080
