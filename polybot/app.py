@@ -102,5 +102,4 @@ def load_test():
 
 if __name__ == "__main__":
     bot = ObjectDetectionBot(TELEGRAM_TOKEN, TELEGRAM_APP_URL, QUEUE_NAME)
-
     app.run(host='0.0.0.0', port=8443)

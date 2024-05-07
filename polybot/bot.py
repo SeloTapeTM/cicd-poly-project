@@ -304,5 +304,4 @@ class ObjectDetectionBot(Bot):
             # Send the processed image back to the user
             self.send_text(msg['chat']['id'], text=f'Completed!\nHere\'s the result:')
             self.send_photo(msg['chat']['id'], processed_image_path)
-
         self.processing_completed = True
