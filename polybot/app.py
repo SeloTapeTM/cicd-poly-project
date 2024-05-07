@@ -40,7 +40,7 @@ secrets = get_secret()
 TELEGRAM_TOKEN = secrets["TELEGRAM_TOKEN"]  # os.environ['TELEGRAM_TOKEN']
 QUEUE_NAME = secrets["QUEUE_NAME"]
 TELEGRAM_APP_URL = secrets["TELEGRAM_APP_URL_K8S"] # "omerd-bot-k8s.devops-int-college.com"  # os.environ['TELEGRAM_APP_URL']
-logger.info(f'after secret. \n\nTELEGRAM_APP_URL: {TELEGRAM_APP_URL} \nTELEGRAM TOKEN: {TELEGRAM_TOKEN}\nQUEUE NAME: {QUEUE_NAME}')
+# logger.info(f'after secret. \n\nTELEGRAM_APP_URL: {TELEGRAM_APP_URL} \nTELEGRAM TOKEN: {TELEGRAM_TOKEN}\nQUEUE NAME: {QUEUE_NAME}')
 
 
 @app.route('/', methods=['GET'])
