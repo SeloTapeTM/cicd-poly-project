@@ -1,33 +1,37 @@
-# k8s/deployment-demo.yaml
+# polybot-dev-deployment.yaml
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: polybot
+  name: polybot-dev
   labels:
-    app: polybot
+    app: polybot-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: polybot
+      app: polybot-dev
   template:
     metadata:
         labels:
-          app: polybot
+          app: polybot-dev
     spec:
       containers:
-      - name: server
-        image: selotapetm/polybot-cicd-dev:0.0.4
+      - name: polybot-dev
+        image: IMG_URL #selotapetm/polybot-dev-k8s:0.0.3
+        env:
+          - name: secret_name
+            value: "omerd-secret-tg-dev"
 ---
+# polybot-dev-service.yaml
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: polybot-svc
+  name: polybot-dev-svc
 spec:
   selector:
-    app: polybot
+    app: polybot-dev
   ports:
     - protocol: TCP
       port: 8443

@@ -6,21 +6,26 @@ pipeline {
 
     environment {
         DH_NAME = "selotapetm"
-        FULL_VER = "0.0.$BUILD_NUMBER"
+        FULL_VER = "0.2.$BUILD_NUMBER"
         IMAGE_NAME = "polybot-cicd-dev"
     }
     stages {
         stage('Build') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
-                {
-                    sh '''
-                    cd polybot
-                    docker login -u $USERNAME -p $PASSWORD
-                    docker build -t $DH_NAME/$IMAGE_NAME:$FULL_VER .
-                    docker push $DH_NAME/$IMAGE_NAME:$FULL_VER
-                    '''
+                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
+                    script {
+                    docker.build("${env.DH_NAME}/${env.IMAGE_NAME}:${env.FULL_VER}", "-f polybot/Dockerfile ./polybot").push()
+                    }
                 }
+//                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
+//                 {
+//                     sh '''
+//                     cd polybot
+//                     docker login -u $USERNAMEd -p $PASSWORD
+//                     docker build -t $DH_NAME/$IMAGE_NAME:$FULL_VER .
+//                     docker push $DH_NAME/$IMAGE_NAME:$FULL_VER
+//                     '''
+//                 }
             }
         }
         stage('Trigger Release') {

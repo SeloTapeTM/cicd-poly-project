@@ -11,6 +11,8 @@ from datetime import datetime
 from img import img_proc
 
 
+
+
 # Static Helper Methods
 def upload_file(file_name, bucket, object_name=None):
     """Upload a file to an S3 bucket
@@ -47,7 +49,7 @@ class Bot:
         time.sleep(0.5)
 
         # set the webhook URL
-        self.telegram_bot_client.set_webhook(url=f'{telegram_chat_url}/{token}/', timeout=60)
+        self.telegram_bot_client.set_webhook(url=f'{telegram_chat_url}/{token}/', timeout=60) #, certificate=open(f'/app/YOURPUBLIC.pem', 'r'))
 
         logger.info(f'Telegram Bot information\n\n{self.telegram_bot_client.get_me()}')
 
@@ -96,10 +98,11 @@ class Bot:
 
 
 class ObjectDetectionBot(Bot):
-    def __init__(self, token, telegram_chat_url):
+    def __init__(self, token, telegram_chat_url, queue_name):
         super().__init__(token, telegram_chat_url)
         self.processing_completed = True
         self.s3_client = boto3.client('s3')
+        self.queue_name = queue_name
 
     def handle_message(self, msg):
         logger.info(f'Incoming message: {msg}')
@@ -195,7 +198,7 @@ class ObjectDetectionBot(Bot):
         # Create an SQS client
         sqs = boto3.client('sqs', region_name='eu-central-1')
         # Your SQS queue URL (replace with your actual SQS queue URL)
-        queue_url = 'https://sqs.eu-central-1.amazonaws.com/352708296901/omerd-aws'
+        queue_url = f'https://sqs.eu-central-1.amazonaws.com/352708296901/{self.queue_name}'
 
         # Create a message with a custom message ID
         chat_id = str(msg["chat"]["id"])

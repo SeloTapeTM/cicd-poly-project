@@ -9,10 +9,10 @@ from loguru import logger
 
 app = flask.Flask(__name__)
 
-
+aws_secret = os.environ['secret_name']
 # Static Helper Methods
 def get_secret():
-    secret_name = "omerd-secret-tg"
+    secret_name = aws_secret
     region_name = "eu-central-1"
 
     # Create a Secrets Manager client
@@ -38,8 +38,9 @@ def get_secret():
 # load TELEGRAM_TOKEN value from Secret Manager
 secrets = get_secret()
 TELEGRAM_TOKEN = secrets["TELEGRAM_TOKEN"]  # os.environ['TELEGRAM_TOKEN']
-
-TELEGRAM_APP_URL = secrets["TELEGRAM_APP_URL"]  # os.environ['TELEGRAM_APP_URL']
+QUEUE_NAME = secrets["QUEUE_NAME"]
+TELEGRAM_APP_URL = secrets["TELEGRAM_APP_URL_K8S"] # "omerd-bot-k8s.devops-int-college.com"  # os.environ['TELEGRAM_APP_URL']
+# logger.info(f'after secret. \n\nTELEGRAM_APP_URL: {TELEGRAM_APP_URL} \nTELEGRAM TOKEN: {TELEGRAM_TOKEN}\nQUEUE NAME: {QUEUE_NAME}')
 
 
 @app.route('/', methods=['GET'])
@@ -100,6 +101,6 @@ def load_test():
 
 
 if __name__ == "__main__":
-    bot = ObjectDetectionBot(TELEGRAM_TOKEN, TELEGRAM_APP_URL)
+    bot = ObjectDetectionBot(TELEGRAM_TOKEN, TELEGRAM_APP_URL, QUEUE_NAME)
 
     app.run(host='0.0.0.0', port=8443)
