@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: yolo5-dev
-        image: selotapetm/yolo-cicd-dev:0.2.16
+        image: selotapetm/yolo-cicd-dev:0.2.17
         env:
           - name: secret_name
             value: "omerd-secret-tg-dev"
