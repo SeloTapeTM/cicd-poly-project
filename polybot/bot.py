@@ -172,6 +172,10 @@ class ObjectDetectionBot(Bot):
                 logger.info("Reveived text that says \"i want to play\".")
                 response = f'OK, you can play a fun game here: \n\n omerd-2048.devops-int-college.com'
                 self.send_text(msg['chat']['id'], response)
+            elif 'show me something funny' in message:
+                logger.info("Reveived text that says \"show me something funny\".")
+                response = f'OK, here\'s a funny image: https://www.hdwallpaper.nu/wp-content/uploads/2015/02/Funny-Cat-Hidden.jpg'
+                self.send_text(msg['chat']['id'], response)
             elif 'supercalifragilisticexpialidocious' in message:
                 logger.info("Received easteregg.")
                 response = f'https://boulderbugle.com/super-secret-easter-egg-39tz7pni'
