@@ -168,6 +168,10 @@ class ObjectDetectionBot(Bot):
                 logger.info("Received text that says \"i love you\".")
                 response = f'Awwww, I love you too! <3 XOXO'
                 self.send_text(msg['chat']['id'], response)
+            elif 'i want to play' in message:
+                logger.info("Reveived text that says \"i want to play\".")
+                response = f'OK, you can play a fun game here: \n\n omerd-2048.devops-int-college.com'
+                self.send_text(msg['chat']['id'], response)
             elif 'supercalifragilisticexpialidocious' in message:
                 logger.info("Received easteregg.")
                 response = f'https://boulderbugle.com/super-secret-easter-egg-39tz7pni'
