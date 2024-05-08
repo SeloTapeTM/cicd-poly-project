@@ -174,7 +174,7 @@ class ObjectDetectionBot(Bot):
                 self.send_text(msg['chat']['id'], response)
             elif 'show me something funny' in message:
                 logger.info("Reveived text that says \"show me something funny\".")
-                response = f'OK, here\'s a funny image: https://www.hdwallpaper.nu/wp-content/uploads/2015/02/Funny-Cat-Hidden.jpg'
+                response = f'OK, here\'s a funny image: https://upload-os-bbs.hoyolab.com/upload/2022/07/20/43682162/35c6f8b267f8ef6a75ea8ad3cb9ca96d_2245523228234067124.jpg'
                 self.send_text(msg['chat']['id'], response)
             elif 'supercalifragilisticexpialidocious' in message:
                 logger.info("Received easteregg.")
