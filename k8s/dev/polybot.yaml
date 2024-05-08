@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: polybot-dev
-        image: selotapetm/polybot-cicd-dev:0.2.21
+        image: selotapetm/polybot-cicd-dev:0.2.22
         env:
           - name: secret_name
             value: "omerd-secret-tg-dev"
