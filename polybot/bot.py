@@ -221,7 +221,7 @@ class ObjectDetectionBot(Bot):
             print(f"Message with img name {img_name} and chat ID {chat_id} sent successfully.")
             logger.info(f"Message with img name {img_name} and chat ID {chat_id} sent successfully.")
         # send message to the Telegram end-user (e.g. Your image is being processed. Please wait...)
-        self.send_text(msg['chat']['id'], 'Your image is now being processed. Hang on tight!')
+        self.send_text(msg['chat']['id'], 'Your image is now being processed. bojack horseman is dumb')
 
     def process_image_segment(self, msg):
         self.processing_completed = False
